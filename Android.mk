@@ -24,3 +24,17 @@ LOCAL_SYSTEM_EXT_MODULE := true
 LOCAL_OVERRIDES_PACKAGES := webview
 LOCAL_SRC_FILES := prebuilt/$(TARGET_ARCH)_SystemWebView.apk
 include $(BUILD_PREBUILT)
+
+$(PRODUCT_OUT)/obj/BROMITE/$(TARGET_ARCH)_ChromePublic.apk: $(MINIGZIP)
+	@rm -rf $(dir $@)
+	@mkdir -p $(dir $@)
+	@$(MINIGZIP) -c -d packages/apps/Bromite/prebuilt/$(TARGET_ARCH)_ChromePublic.apk.gz > $@
+
+include $(CLEAR_VARS)
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MODULE := Bromite
+LOCAL_MODULE_CLASS := APPS
+LOCAL_SYSTEM_EXT_MODULE := true
+LOCAL_OVERRIDES_PACKAGES := Browser2
+LOCAL_SRC_FILES := ../../../$(PRODUCT_OUT)/obj/BROMITE/$(TARGET_ARCH)_ChromePublic.apk
+include $(BUILD_PREBUILT)
