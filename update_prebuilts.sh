@@ -18,3 +18,6 @@ for apk in "${APKS[@]}"; do
 	wget "${DOWNLOAD_URL}" -O "prebuilt/${apk}"
 	7z a -txz -v100m "prebuilt/${apk/x64/x86_64}.xz" "prebuilt/${apk}" && rm "prebuilt/${apk}"
 done
+
+git add .
+git commit -m "Update Bromite to ${LATEST_VERSION}"
